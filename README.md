@@ -1,8 +1,19 @@
 # Access content from the shared-content repo
 
-## Adding collection
+# Option 1. Nuxt layers
 
-A new collection must be added in the file content.config.js for each language. If the default language is English, just adding a collection for English content is enough: 
+Add the repo in nuxt.config.js under extends. The content can be accessed without further steps.
+
+```
+export default defineNuxtConfig({
+    extends: ["github:c4a8/c4a8-web-shared-content", { install: true }],
+    ...
+    })
+```
+
+# Option 2. Adding collection
+
+A new collection must be added in the file content.config.js for each language. If the default language is English, just adding a collection for English content is enough:
 
 ```
 export default defineContentConfig({
@@ -17,13 +28,14 @@ export default defineContentConfig({
         prefix: "",
       },
       schema: commonSchema,
-    }),   
+    }),
 }
+    }),
 ```
 
 ## Defining a schema
 
-commonSchema also needs to be defined like this: 
+commonSchema also needs to be defined like this:
 
 ```
 const commonSchema = z.object({
@@ -54,3 +66,4 @@ const eventOverviewData = computed(() => {
   };
 });
 ```
+````
