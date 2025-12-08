@@ -1,69 +1,75 @@
-# Access content from the shared-content repo
+# Nuxt Minimal Starter
 
-# Option 1. Nuxt layers
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-Add the repo in nuxt.config.js under extends. The content can be accessed without further steps.
+## Setup
 
-```
-export default defineNuxtConfig({
-    extends: ["github:c4a8/c4a8-web-shared-content", { install: true }],
-    ...
-    })
-```
+Make sure to install dependencies:
 
-# Option 2. Adding collection
+```bash
+# npm
+npm install
 
-A new collection must be added in the file content.config.js for each language. If the default language is English, just adding a collection for English content is enough:
+# pnpm
+pnpm install
 
-```
-export default defineContentConfig({
-  collections: {
-    ...
-    shared_content_en: defineCollection({
-      type: "page",
-      source: {
-        repository:
-          "https://github.com/c4a8/c4a8-web-shared-content",
-        include: "en/**",
-        prefix: "",
-      },
-      schema: commonSchema,
-    }),
-}
-    }),
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-## Defining a schema
+## Development Server
 
-commonSchema also needs to be defined like this:
+Start the development server on `http://localhost:3000`:
 
+```bash
+# npm
+npm run dev
+
+# pnpm
+pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
 ```
-const commonSchema = z.object({
-  cta: z.object({}).optional(),
-  eventid: z.string().optional(),
-  layout: z.string().optional(),
-  moment: z.string().optional(),
-  author: z.array(z.string()).optional(),
-  hideInRecent: z.boolean().optional(),
-  webcast: z.boolean().optional(),
-  tags: z.array(z.string()).optional(),
-});
+
+## Production
+
+Build the application for production:
+
+```bash
+# npm
+npm run build
+
+# pnpm
+pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
 ```
 
-## Using the content
+Locally preview production build:
 
-So far only the events-overview component supports shared-content.
-By setting useSharedContent to true, the component will use shared-content as as source instead of the contents folder.
+```bash
+# npm
+npm run preview
 
-````
-const eventOverviewData = computed(() => {
-  return {
-    overlap: false,
-    classes: "space-top-lg-2",
-    maxLimit: 15,
-    useSharedContent: true,
-    tag: ["Products"],
-  };
-});
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
 ```
-````
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
